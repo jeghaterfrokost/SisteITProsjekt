@@ -7,4 +7,4 @@ Index siden inneholder:
     Klokkeslett
     Endrende bakgrunn??
     Hilsen basert på tid (god morgen, god formiddag etc...)
-    
+    Nyheter??
