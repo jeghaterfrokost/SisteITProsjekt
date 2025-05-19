@@ -8,3 +8,4 @@ Index siden inneholder:
     Endrende bakgrunn??
     Hilsen basert på tid (god morgen, god formiddag etc...)
     Nyheter??
+    Søkebar
