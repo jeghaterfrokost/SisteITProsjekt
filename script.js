@@ -1,44 +1,74 @@
 
 const h1 = document.getElementById("h1")
-const h2 = document.getElementById("h2")
+const hilse = document.getElementById("hilse")
+const vaerfeil = document.getElementById("vaerfeil")
 
-function vistid(){
+function vistid() {
     const now = new Date();
-    let hourMinute = now.getHours() + ":"
-    if (now.getMinutes < 10){
-        hourMinute += "0"
+    let hour = now.getHours();
+    let minute = now.getMinutes();
+
+    if (hour < 10) {
+        hour = "0" + hour;
     }
-    hourMinute += now.getMinutes()
-    console.log("HourMinute:", hourMinute)
-    h1.innerHTML =  hourMinute
+    if (minute < 10) {
+        minute = "0" + minute;
+    }
+
+    const hourMinute = hour + ":" + minute;
+    console.log("HourMinute:", hourMinute);
+    h1.innerHTML = hourMinute;
 }
+
 setInterval(vistid, 1000)
 
 function hilsetid(){
     const now = new Date();
     if (now.getHours() > 6 && now.getHours() <= 8){
-        h2.innerHTML = "God morgen"
+        hilse.innerHTML = "God morgen"
     }
-    else if(now.getHours() > 8 && now.getHours() <= 12){
-        h2.innerHTML = "God formiddag"
+    else if(now.getHours() > 8 && now.getHours() <= 11){
+        hilse.innerHTML = "God formiddag"
     }
-    else if(now.getHours() > 12 && now.getHours() <= 18){
-        h2.innerHTML = "God ettermiddag"
+    else if(now.getHours() > 11 && now.getHours() <= 18){
+        hilse.innerHTML = "God ettermiddag"
     }
     else if(now.getHours() > 18 && now.getHours() <= 24){
-        h2.innerHTML = "God kveld"
+        hilse.innerHTML = "God kveld"
     }
     else{
-        h2.innerHTML = "God aften"
+        hilse.innerHTML = "God aften"
     }
 }
 setInterval(hilsetid, 1000)
 
-function visevaeret(){
-    const response = await fetch()
-    if(response.status == 200){
-    console.log(response)
-    const funfactJSON = await response.json()}
+function visvaeret(){
 
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            posisjon => {
+                const lat = posisjon.coords.latitude;
+                const lon = posisjon.coords.longitude;
+
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        const weather = data.current_weather;
+                        console.log(weather);
+                        h2.innerHTML = `Temperatur: ${weather.temperature}°C`;
+                    })
+                    .catch(error => {
+                        console.error("Feil ved henting av værdata:", error);
+                        h2.innerHTML = "Klarte ikke å hente værdata";
+                    });
+            },
+            error => {
+                console.error("Feil ved posisjonering:", error);
+            }
+        );
+    } else {
+        vaerfeil.innerHTML = "Geolokasjon støttes ikke av nettleseren";
+    }
 }
-
