@@ -1,7 +1,7 @@
-
 const h1 = document.getElementById("h1")
 const hilse = document.getElementById("hilse")
 const vaerfeil = document.getElementById("vaerfeil")
+const vaerElm = document.getElementById("vaer")
 
 function vistid() {
     const now = new Date();
@@ -16,7 +16,6 @@ function vistid() {
     }
 
     const hourMinute = hour + ":" + minute;
-    console.log("HourMinute:", hourMinute);
     h1.innerHTML = hourMinute;
 }
 
@@ -43,7 +42,6 @@ function hilsetid(){
 setInterval(hilsetid, 1000)
 
 function visvaeret(){
-
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             posisjon => {
@@ -56,19 +54,22 @@ function visvaeret(){
                     .then(response => response.json())
                     .then(data => {
                         const weather = data.current_weather;
-                        console.log(weather);
-                        h2.innerHTML = `Temperatur: ${weather.temperature}°C`;
+                        vaerElm.innerHTML = `Temperatur: ${weather.temperature}°C<br>Vind: ${weather.windspeed} m/s`;
+                        vaerfeil.innerHTML = "";
                     })
                     .catch(error => {
-                        console.error("Feil ved henting av værdata:", error);
-                        h2.innerHTML = "Klarte ikke å hente værdata";
+                        vaerfeil.innerHTML = "Klarte ikke å hente værdata";
+                        vaerElm.innerHTML = "";
                     });
             },
             error => {
-                console.error("Feil ved posisjonering:", error);
+                vaerfeil.innerHTML = "Feil ved posisjonering";
+                vaerElm.innerHTML = "";
             }
         );
     } else {
         vaerfeil.innerHTML = "Geolokasjon støttes ikke av nettleseren";
+        vaerElm.innerHTML = "";
     }
 }
+visvaeret();
