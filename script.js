@@ -76,25 +76,28 @@ visvaeret();
 
 function nyheter() {
     const apiKey = "759422acb48ef91454e1cd6e43c6c34e"; 
-    const url = fetch(`https://gnews.io/api/v4/top-headlines?topic=technology&lang=no&max=5&token=${apiKey}`);
+    const nyheturl = (`https://gnews.io/api/v4/top-headlines?topic=technology&lang=no&max=5&token=${apiKey}`);
+    console.log(nyheturl);
 
-    fetch(url)
+    fetch(nyheturl)
         .then(response => response.json())
         .then(data => {
             if (data.status === "ok") {
                 let nyhetsHtml = "<h3>Nyheter</h3><ul>";
                 data.articles.slice(0, 5).forEach(artikkel => {
-                    nyhetsHtml += `<li><a href="${artikkel.url}" target="_blank">${artikkel.title}</a></li>`;
+                    nyhetsHtml += `<li><a href="${artikkel.nyheturl}" target="_blank">${artikkel.title}</a></li>`;
                 });
                 nyhetsHtml += "</ul>";
-                // Opprett et element i HTML med id="nyheter" for å vise nyhetene
                 document.getElementById("nyheter").innerHTML = nyhetsHtml;
             } else {
                 document.getElementById("nyheter").innerHTML = "Klarte ikke å hente nyheter.";
+                console.log("Feil ved henting av nyheter:", data.status);   
+                
             }
         })
         .catch(error => {
             document.getElementById("nyheter").innerHTML = "Feil ved henting av nyheter.";
         });
+       
 }
 nyheter();
