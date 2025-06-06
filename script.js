@@ -82,10 +82,10 @@ function nyheter() {
     fetch(nyheturl)
         .then(response => response.json())
         .then(data => {
-            if (data.status === "ok") {
+            if (data.articles && data.articles.length > 0) {
                 let nyhetsHtml = "<h3>Nyheter</h3><ul>";
                 data.articles.slice(0, 5).forEach(artikkel => {
-                    nyhetsHtml += `<li><a href="${artikkel.nyheturl}" target="_blank">${artikkel.title}</a></li>`;
+                    nyhetsHtml += `<li><a href="${artikkel.url}" target="_blank">${artikkel.title}</a></li>`;
                 });
                 nyhetsHtml += "</ul>";
                 document.getElementById("nyheter").innerHTML = nyhetsHtml;
