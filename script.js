@@ -48,13 +48,15 @@ function visvaeret(){
                 const lat = posisjon.coords.latitude;
                 const lon = posisjon.coords.longitude;
 
-                const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+                const vaerurl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+                console.log(vaerurl);
 
-                fetch(url)
+                fetch(vaerurl)
                     .then(response => response.json())
                     .then(data => {
                         const weather = data.current_weather;
-                        vaerElm.innerHTML = `Temperatur: ${weather.temperature}°C<br>Vind: ${weather.windspeed} m/s`;
+                        const vind = weather.windspeed / 3.6
+                        vaerElm.innerHTML = `Temperatur: ${weather.temperature}°C<br>Vind: ${vind.toFixed(1)} m/s`;
                         vaerfeil.innerHTML = "";
                     })
                     .catch(error => {
