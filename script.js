@@ -1,3 +1,5 @@
+npm install --save @polygon.io/client-js
+
 const h1 = document.getElementById("h1")
 const hilse = document.getElementById("hilse")
 const vaerfeil = document.getElementById("vaerfeil")
@@ -21,27 +23,27 @@ function vistid() {
 
 setInterval(vistid, 1000)
 
-function hilsetid(){
+function hilsetid() {
     const now = new Date();
-    if (now.getHours() > 6 && now.getHours() <= 8){
+    if (now.getHours() > 6 && now.getHours() <= 8) {
         hilse.innerHTML = "God morgen"
     }
-    else if(now.getHours() > 8 && now.getHours() <= 11){
+    else if (now.getHours() > 8 && now.getHours() <= 11) {
         hilse.innerHTML = "God formiddag"
     }
-    else if(now.getHours() > 11 && now.getHours() <= 18){
+    else if (now.getHours() > 11 && now.getHours() <= 18) {
         hilse.innerHTML = "God ettermiddag"
     }
-    else if(now.getHours() > 18 && now.getHours() <= 24){
+    else if (now.getHours() > 18 && now.getHours() <= 24) {
         hilse.innerHTML = "God kveld"
     }
-    else{
+    else {
         hilse.innerHTML = "God aften"
     }
 }
 setInterval(hilsetid, 1000)
 
-function visvaeret(){
+function visvaeret() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             posisjon => {
@@ -77,8 +79,8 @@ function visvaeret(){
 visvaeret();
 
 function nyheter() {
-    const apiKey = "759422acb48ef91454e1cd6e43c6c34e"; 
-    const nyheturl = (`https://gnews.io/api/v4/top-headlines?topic=technology&lang=no&max=5&token=${apiKey}`);
+    const apiKeyVaer = "759422acb48ef91454e1cd6e43c6c34e";
+    const nyheturl = (`https://gnews.io/api/v4/top-headlines?topic=technology&lang=no&max=5&token=${apiKeyVaer}`);
     console.log(nyheturl);
 
     fetch(nyheturl)
@@ -93,13 +95,39 @@ function nyheter() {
                 document.getElementById("nyheter").innerHTML = nyhetsHtml;
             } else {
                 document.getElementById("nyheter").innerHTML = "Klarte ikke å hente nyheter.";
-                console.log("Feil ved henting av nyheter:", data.status);   
-                
+                console.log("Feil ved henting av nyheter:", data.status);
+
             }
         })
         .catch(error => {
             document.getElementById("nyheter").innerHTML = "Feil ved henting av nyheter.";
         });
-       
+
 }
 nyheter();
+
+function aksjer() {
+    const apiKeyAksjer = "ltmUVNj0Wwz7hdWiEXoiWy216jkP5EI4";
+    const aksjeurl = `https://api.polygon.io/v3/reference/dividends?apiKey=${apiKeyAksjer}`;
+    console.log(aksjeurl);
+
+    fetch(aksjeurl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Nettverksfeil: " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+
+            data.results.forEach(aksje => {
+                console.log("Aksje:", aksje.id, "Utbytte:", aksje.cash_amount, "Dato:", aksje.pay_date);
+            })
+
+        })
+        .catch(error => {
+            console.error("Feil ved henting av aksjedata:", error);
+        });
+}
+
+aksjer();
