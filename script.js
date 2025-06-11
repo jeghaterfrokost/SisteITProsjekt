@@ -1,6 +1,6 @@
-npm install --save @polygon.io/client-js
+//npm install --save @polygon.io/client-js
 
-const h1 = document.getElementById("h1")
+const klokke = document.getElementById("klokke")
 const hilse = document.getElementById("hilse")
 const vaerfeil = document.getElementById("vaerfeil")
 const vaerElm = document.getElementById("vaer")
@@ -18,7 +18,7 @@ function vistid() {
     }
 
     const hourMinute = hour + ":" + minute;
-    h1.innerHTML = hourMinute;
+    klokke.innerHTML = hourMinute;
 }
 
 setInterval(vistid, 1000)

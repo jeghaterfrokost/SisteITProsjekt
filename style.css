@@ -22,3 +22,37 @@ img {
   height: auto;
 }
 
+body{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header{
+  display: flex;
+  flex-direction: row;
+}
+
+main{
+  display: flex;
+  flex-direction: row;
+}
+
+.klokke{
+  width: 30%;
+  justify-content: center;
+  align-items: center;
+}
+
+.hilse{
+  width: 30%;
+  justify-content: center;
+  align-items: center;
+}
+
+.vaeret{
+  width: 30%;
+  justify-content: center;
+  align-items: center;
+}
+
