@@ -31,28 +31,50 @@ body{
 header{
   display: flex;
   flex-direction: row;
+  gap: 3%;
 }
 
-main{
-  display: flex;
-  flex-direction: row;
-}
 
 .klokke{
   width: 30%;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .hilse{
   width: 30%;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .vaeret{
   width: 30%;
+  display: flex;
   justify-content: center;
   align-items: center;
+}
+
+main{
+  display: flex;
+  flex-direction: row;
+}
+.vetikke{
+  width: 30%;
+    display: flex;
+
+}
+
+.sok{
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nyheter{
+    width: 30%;
+    display: flex;
 }
 
