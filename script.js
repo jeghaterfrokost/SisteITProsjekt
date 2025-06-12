@@ -132,7 +132,8 @@ function getAksjer(fetchFresh = false) {
 
         if (!fetchFresh && lagret[aksje.symbol]) {
             // Vis lagret verdi
-            if (elm) elm.innerHTML = lagret[aksje.symbol];
+            // Sørg for at den lagrede verdien også vises avrundet
+            if (elm) elm.innerHTML = `$${Number(lagret[aksje.symbol]).toFixed(2)}`;
             return;
         }
 
@@ -141,15 +142,17 @@ function getAksjer(fetchFresh = false) {
             .then(response => {
                 if (response.status === 429) {
                     if (elm) elm.innerHTML = "For mange requests";
-                    return {};
+                    return {}; // Return a rejected promise to stop further .then() calls
                 }
                 return response.json();
             })
             .then(data => {
                 if (data.results && data.results.values && data.results.values[0]) {
                     const verdi = data.results.values[0].value;
-                    if (elm) elm.innerHTML = verdi;
-                    lagret[aksje.symbol] = verdi;
+                    const avrundetVerdi = Number(verdi).toFixed(2); // Avrund verdien her
+
+                    if (elm) elm.innerHTML = `$${avrundetVerdi}`;
+                    lagret[aksje.symbol] = avrundetVerdi; // Lagre den avrundede verdien
                     // Oppdater localStorage
                     localStorage.setItem("aksjeverdier", JSON.stringify(lagret));
                 } else {
@@ -157,45 +160,9 @@ function getAksjer(fetchFresh = false) {
                 }
             })
             .catch(error => {
+                console.error("Feil ved henting av aksjeverdi for", aksje.symbol, error); // Bedre feil logging
                 if (elm) elm.innerHTML = "Feil";
             });
-    });
-}
-
-// Tider for oppdatering (norsk tid): 15:30, 19:00, 22:30
-const updateTimes = [
-    { hour: 15, minute: 30 },
-    { hour: 19, minute: 0 },
-    { hour: 22, minute: 30 }
-];
-
-// Sjekk om det er tid for oppdatering
-function shouldUpdateNow() {
-    const now = new Date();
-    return updateTimes.some(t => now.getHours() === t.hour && now.getMinutes() === t.minute);
-}
-
-// Planlegg oppdatering ved de faste tidene
-function scheduleAksjeUpdates() {
-    function getNextTimeout(targetHour, targetMinute) {
-        const now = new Date();
-        const next = new Date();
-        next.setHours(targetHour, targetMinute, 0, 0);
-        if (next <= now) {
-            next.setDate(next.getDate() + 1);
-        }
-        return next - now;
-    }
-
-    updateTimes.forEach(time => {
-        function schedule() {
-            const timeout = getNextTimeout(time.hour, time.minute);
-            setTimeout(() => {
-                getAksjer(true); // Hent ferske verdier og lagre
-                schedule(); // Planlegg neste gang
-            }, timeout);
-        }
-        schedule();
     });
 }
 
