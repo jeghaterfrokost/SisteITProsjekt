@@ -1,80 +1,187 @@
 html {
-  box-sizing: border-box;
-  font-size: 16px;
+    box-sizing: border-box;
+    font-size: 16px;
 }
 
-*, *:before, *:after {
-  box-sizing: inherit;
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
 }
 
-body, h1, h2, h3, h4, h5, h6, p, ol, ul {
-  margin: 0;
-  padding: 0;
-  font-weight: normal;
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
 }
 
-ol, ul {
-  list-style: none;
+ol,
+ul {
+    list-style: none;
 }
 
 img {
-  max-width: 100%;
-  height: auto;
+    max-width: 100%;
+    height: auto;
 }
 
-body{
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-header{
-  display: flex;
-  flex-direction: row;
-  gap: 3%;
-}
-
-
-.klokke{
-  width: 30%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.hilse{
-  width: 30%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.vaeret{
-  width: 30%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-main{
-  display: flex;
-  flex-direction: row;
-}
-.vetikke{
-  width: 30%;
+body {
+    font-family: 'Roboto', 'Arial', 'Helvetica Neue', sans-serif;
+    height: 100vh;
     display: flex;
-
+    flex-direction: column;
+    padding: 40px;
+    gap: 40px;
 }
 
-.sok{
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+.klokke {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hilse {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.vaeret {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.aksjer, .sok {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.sok {
     width: 30%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+    flex-direction: column;
 }
 
-.nyheter{
-    width: 30%;
+.nyheter {
+    flex: 0 1 350px; /* Tar mindre plass, men vokser ved behov */
+    min-width: 250px;
+    max-width: 400px;
     display: flex;
+    flex-direction: column;
+    flex-shrink: 1;
+    overflow-wrap: break-word;
 }
 
+section {
+    border: 1px solid black;
+}
+
+ul {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    font-size: 25px;
+    padding: 20px;      
+    margin: 10px 0;     
+}
+
+#nyheter {
+    padding: 20px;
+    margin: 10px 0 2px 0; /* Mindre margin nederst */
+    height: 100%;
+    box-sizing: border-box;
+}
+
+#nyheter h1 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    margin-left: 5px;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+#nyheter a {
+    color: black;
+    text-decoration: none;
+}
+
+#nyheter a:hover {
+    text-decoration: underline;
+}
+
+.google-logo {
+    font-family: 'Product Sans', Arial, Helvetica, sans-serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    user-select: none;
+}
+
+.g-blaa   { color: #4285F4; }
+.g-rod    { color: #EA4335; }
+.g-gul { color: #FBBC05; }
+.g-gronn  { color: #34A853; }
+
+.nettsidecontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.nettsider {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+
+.nettsider img {
+    width: 90px;
+    height: 40px;
+    object-fit: contain;
+    margin: 5px 0;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    border: 1px solid #eee;
+    transition: transform 0.15s;
+}
+
+.nettsider img:hover {
+    transform: scale(1.07);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
