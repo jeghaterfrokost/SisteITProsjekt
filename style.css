@@ -1,3 +1,6 @@
+/* =========================
+   Reset og basis
+   ========================= */
 html {
     box-sizing: border-box;
     font-size: 16px;
@@ -34,6 +37,9 @@ img {
     height: auto;
 }
 
+/* =========================
+   Body og layout
+   ========================= */
 body {
     font-family: 'Roboto', 'Arial', 'Helvetica Neue', sans-serif;
     height: 100vh;
@@ -41,34 +47,18 @@ body {
     flex-direction: column;
     padding: 40px;
     gap: 40px;
+    background: #eaf6fb; /* Lys blå bakgrunn */
+    color: #183153;       /* Mørk blå tekst */
 }
 
+/* =========================
+   Header og seksjoner
+   ========================= */
 header {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-}
-
-
-.klokke {
-    width: 30%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.hilse {
-    width: 30%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.vaeret {
-    width: 30%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background: transparent;
 }
 
 main {
@@ -77,18 +67,33 @@ main {
     gap: 30px;
 }
 
+section {
+    border: 1.5px solid #b3d8f6;
+    background: #f6fbff; /* Svært lys blå bakgrunn for seksjoner */
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(100, 180, 255, 0.07);
+}
+
+/* =========================
+   Klokke, hilse, været
+   ========================= */
+.klokke, .hilse, .vaeret {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #e0f0fa;
+    border-radius: 8px;
+    color: #183153;
+}
+
+/* =========================
+   Hovedseksjoner i main
+   ========================= */
 .aksjer, .sok {
     flex: 1 1 0;
     min-width: 0;
     display: flex;
-    flex-direction: column;
-}
-
-.sok {
-    width: 30%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
     flex-direction: column;
 }
 
@@ -100,22 +105,15 @@ main {
     flex-direction: column;
     flex-shrink: 1;
     overflow-wrap: break-word;
+    border: 2px solid #8ecae6;
+    background: #e0f7fa;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(100, 180, 255, 0.07);
 }
 
-section {
-    border: 1px solid black;
-}
-
-ul {
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    font-size: 25px;
-    padding: 20px;      
-    margin: 10px 0;     
-}
-
+/* =========================
+   Nyheter-innhold
+   ========================= */
 #nyheter {
     padding: 20px;
     margin: 10px 0 2px 0; /* Mindre margin nederst */
@@ -126,62 +124,140 @@ ul {
 #nyheter h1 {
     margin-top: 0;
     margin-bottom: 20px;
-    margin-left: 5px;
     font-size: 2rem;
     font-weight: bold;
     text-align: center;
+    color: #1565c0;
+}
+
+ul {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    font-size: 25px;
+    padding: 20px;
+    margin: 10px 0;
+    background: transparent;
+    color: #183153;
 }
 
 #nyheter a {
-    color: black;
+    color: #1565c0;
     text-decoration: none;
+    transition: color 0.2s;
 }
 
 #nyheter a:hover {
+    color: #0d47a1;
     text-decoration: underline;
 }
 
+/* =========================
+   Google-logo og søk
+   ========================= */
 .google-logo {
     font-family: 'Product Sans', Arial, Helvetica, sans-serif;
-    font-size: 2.5rem;
+    font-size: 2.7rem;
     font-weight: bold;
     letter-spacing: 1px;
-    margin-bottom: 20px;
+    margin: 10px 0 32px 0;
     user-select: none;
+    background: transparent;
 }
 
 .g-blaa   { color: #4285F4; }
 .g-rod    { color: #EA4335; }
-.g-gul { color: #FBBC05; }
+.g-gul    { color: #FBBC05; }
 .g-gronn  { color: #34A853; }
 
-.nettsidecontainer {
+.sok {
+    flex: 1 1 0;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    justify-content: flex-start;
+    padding: 40px 0 30px 0;
+    background: #f6fbff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(100, 180, 255, 0.07);
+}
+
+.sok form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.sok input[type="search"] {
+    width: 70%;
+    max-width: 350px;
+    min-width: 180px;
+    padding: 10px 18px;
+    font-size: 1.2rem;
+    border: 1.5px solid #b3d8f6;
+    border-radius: 24px;
+    background: #eaf6fb;
+    color: #183153;
+    transition: box-shadow 0.2s, border 0.2s;
+    box-shadow: 0 1px 4px rgba(100,180,255,0.04);
+}
+
+.sok input[type="search"]:focus {
+    outline: none;
+    border: 2px solid #8ecae6;
+    background: #f6fbff;
+    box-shadow: 0 2px 8px rgba(100,180,255,0.10);
+}
+
+/* =========================
+   Ofte besøkte sider
+   ========================= */
+.nettsidecontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    background: transparent;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.nettsidecontainer h1 {
+    font-size: 1.35rem;
+    color: #155fa0;
+    margin-bottom: 14px;
+    margin-left: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    text-shadow: 0 1px 0 #eaf6fb;
 }
 
 .nettsider {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 15px;
+    gap: 18px;
+    width: 100%;
+    justify-content: flex-start;
 }
 
 .nettsider img {
-    width: 90px;
-    height: 40px;
+    width: 85px;
+    height: 38px;
     object-fit: contain;
-    margin: 5px 0;
-    background: white;
-    border-radius: 6px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
-    border: 1px solid #eee;
-    transition: transform 0.15s;
+    margin: 0;
+    background: #f6fbff;
+    border: 1.5px solid #b3d8f6;
+    border-radius: 7px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    transition: transform 0.15s, box-shadow 0.15s;
 }
 
 .nettsider img:hover {
-    transform: scale(1.07);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transform: scale(1.08);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.13);
 }
