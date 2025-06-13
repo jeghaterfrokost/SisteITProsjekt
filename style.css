@@ -47,8 +47,8 @@ body {
     flex-direction: column;
     padding: 40px;
     gap: 40px;
-    background: #eaf6fb; /* Lys blå bakgrunn */
-    color: #183153;       /* Mørk blå tekst */
+    background: #eaf6fb; 
+    color: #183153;       
 }
 
 /* =========================
@@ -69,7 +69,7 @@ main {
 
 section {
     border: 1.5px solid #b3d8f6;
-    background: #f6fbff; /* Svært lys blå bakgrunn for seksjoner */
+    background: #f6fbff; 
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(100, 180, 255, 0.07);
 }
@@ -91,7 +91,7 @@ section {
 #klokke {
     font-size: 2.5rem;
     font-weight: bold;
-    color: #1565c0; /* Mørk blå for klokke */
+    color: #1565c0; 
 }
 
 .vaeret{
@@ -112,7 +112,7 @@ section {
 }
 
 .nyheter {
-    flex: 0 1 350px; /* Tar mindre plass, men vokser ved behov */
+    flex: 0 1 350px; 
     min-width: 250px;
     max-width: 400px;
     display: flex;
@@ -130,7 +130,7 @@ section {
    ========================= */
 #nyheter {
     padding: 40px;
-    margin: 10px 0 2px 0; /* Mindre margin nederst */
+    margin: 10px 0 2px 0; 
     height: 100%;
     box-sizing: border-box;
 }
