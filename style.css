@@ -42,7 +42,7 @@ img {
    ========================= */
 body {
     font-family: 'Roboto', 'Arial', 'Helvetica Neue', sans-serif;
-    height: 100vh;
+    height: 80vh;
     display: flex;
     flex-direction: column;
     padding: 40px;
@@ -88,6 +88,12 @@ section {
     padding: 30px;
 }
 
+#klokke {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #1565c0; /* Mørk blå for klokke */
+}
+
 .vaeret{
     display: flex;
     padding: 20px;
@@ -102,6 +108,7 @@ section {
     min-width: 0;
     display: flex;
     flex-direction: column;
+    padding: 40px;
 }
 
 .nyheter {
@@ -122,7 +129,7 @@ section {
    Nyheter-innhold
    ========================= */
 #nyheter {
-    padding: 20px;
+    padding: 40px;
     margin: 10px 0 2px 0; /* Mindre margin nederst */
     height: 100%;
     box-sizing: border-box;
@@ -138,7 +145,7 @@ section {
 }
 
 ul {
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -246,9 +253,8 @@ ul {
 }
 
 .nettsider {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
     gap: 18px;
     width: 100%;
     justify-content: flex-start;
@@ -308,4 +314,15 @@ ul {
     color: #1565c0;
     min-width: 60px;
     text-align: right;
+}
+
+.aksjetittel, .nettsidetittel{
+    font-size: 1.2rem;
+    color: #155fa0;
+    margin-bottom: 8px;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    text-shadow: 0 1px 0 #eaf6fb;
 }

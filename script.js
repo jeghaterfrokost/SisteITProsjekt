@@ -1,4 +1,12 @@
-//npm install --save @polygon.io/client-js
+const nettsidebruker = document.getElementById("nettsidebruker")
+function velgBruker() {
+    let navn = "";
+        navn = prompt("Venligst skriv Deres navn");
+        if (navn === null) navn = ""; 
+    nettsidebruker.innerHTML = navn
+}
+
+velgBruker();
 
 const klokke = document.getElementById("klokke")
 const hilse = document.getElementById("hilse")
@@ -119,7 +127,6 @@ function getAksjer(fetchFresh = false) {
         { symbol: "META", elm: "metaverdielm" }
     ];
 
-    // Hent lagrede verdier fra localStorage
     let lagret = {};
     try {
         lagret = JSON.parse(localStorage.getItem("aksjeverdier")) || {};
@@ -131,42 +138,36 @@ function getAksjer(fetchFresh = false) {
         const elm = document.getElementById(aksje.elm);
 
         if (!fetchFresh && lagret[aksje.symbol]) {
-            // Vis lagret verdi
-            // Sørg for at den lagrede verdien også vises avrundet
             if (elm) elm.innerHTML = `$${Number(lagret[aksje.symbol]).toFixed(2)}`;
             return;
         }
 
-        // Hent ny verdi fra API
         fetch(`https://api.polygon.io/v1/indicators/sma/${aksje.symbol}?timespan=day&adjusted=true&window=1&series_type=close&order=desc&limit=1&apikey=${key}`)
             .then(response => {
                 if (response.status === 429) {
                     if (elm) elm.innerHTML = "For mange requests";
-                    return {}; // Return a rejected promise to stop further .then() calls
+                    return {}; 
                 }
                 return response.json();
             })
             .then(data => {
                 if (data.results && data.results.values && data.results.values[0]) {
                     const verdi = data.results.values[0].value;
-                    const avrundetVerdi = Number(verdi).toFixed(2); // Avrund verdien her
+                    const avrundetVerdi = Number(verdi).toFixed(2); 
 
                     if (elm) elm.innerHTML = `$${avrundetVerdi}`;
-                    lagret[aksje.symbol] = avrundetVerdi; // Lagre den avrundede verdien
-                    // Oppdater localStorage
+                    lagret[aksje.symbol] = avrundetVerdi; 
                     localStorage.setItem("aksjeverdier", JSON.stringify(lagret));
                 } else {
                     if (elm) elm.innerHTML = "Feil";
                 }
             })
             .catch(error => {
-                console.error("Feil ved henting av aksjeverdi for", aksje.symbol, error); // Bedre feil logging
+                console.error("Feil ved henting av aksjeverdi for", aksje.symbol, error); 
                 if (elm) elm.innerHTML = "Feil";
             });
     });
 }
 
-// Ved lasting: vis lagrede verdier
 getAksjer(false);
-// Planlegg oppdateringer
 scheduleAksjeUpdates();
